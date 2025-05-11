@@ -123,27 +123,17 @@ if "df" in locals():
 
     # Category distribution
     st.write("### 📊 Category Distribution")
-    for cat_col in categorical_cols:
-        if df[cat_col].nunique() > 1:
-            fig_cat = px.bar(df[cat_col].value_counts().reset_index(), 
-                             x="index", y=cat_col,
-                             title=f"Distribution of {cat_col}",
-                             color="index", 
-                             color_discrete_sequence=px.colors.qualitative.Set2,
-                             labels={"index": cat_col, cat_col: "Count"})
-            st.plotly_chart(fig_cat)
-        else:
-            st.warning(f"⚠️ No variation in the '{cat_col}' column, skipping chart.")
+    st.markdown("The loan default dataset contains a mix of categorical and numerical features that describe the financial and demographic characteristics of loan applicants. Understanding the distribution of these categorical features is crucial for accurate model training and meaningful insights.")
+    st.markdown("such as Employemnt type,Education Level, and Martial status. ")
+
+
 
     # Pie chart for Age distribution (if available)
-    if "Age" in df.columns:
-        st.write("### 🎂 Age Distribution")
-        age_bins = pd.cut(df["Age"], bins=[18, 25, 35, 45, 55, 65, 75, 85, 100], right=False)
-        age_dist = age_bins.value_counts().reset_index().sort_values(by="index")
-        age_dist.columns = ["Age Group", "Count"]
-        fig_age = px.pie(age_dist, values="Count", names="Age Group", title="Age Group Distribution",
-                         color_discrete_sequence=px.colors.qualitative.Pastel)
-        st.plotly_chart(fig_age)
+    st.write("### 📊 Age Insights")
+    st.markdown("Younger borrowers may have higher default rates due to less financial stability and limited credit history. ")
+    st.markdown("Middle-aged borrowers might be more financially stable but have higher financial commitments (e.g., mortgages and family expenses).")
+    
+        
 
 # Footer
 st.markdown("---")
