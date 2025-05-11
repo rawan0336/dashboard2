@@ -21,7 +21,7 @@ st.markdown("A powerful tool for understanding model performance and feature imp
 
 # File path for the saved dataset
 DATA_FILE = "/content/trainnn.csv"
-ZIP_FILE = "/content/trainnn.zip"
+ZIP_FILE = "/content/trainnn.csv.zip"
 
 # Load the dataset without asking the user to upload
 if os.path.exists(DATA_FILE):
