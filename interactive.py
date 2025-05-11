@@ -21,13 +21,20 @@ st.markdown("A powerful tool for understanding model performance and feature imp
 
 # File path for the saved dataset
 DATA_FILE = "/content/trainnn.csv"
+ZIP_FILE = "/content/trainnn.zip"
 
 # Load the dataset without asking the user to upload
 if os.path.exists(DATA_FILE):
     df = pd.read_csv(DATA_FILE)
-    st.write("### Loaded Saved Dataset")
+    st.write("### ✅ Loaded Saved Dataset (`trainnn.csv`)")
+elif os.path.exists(ZIP_FILE):
+    # Extract the dataset if only the ZIP is present
+    with zipfile.ZipFile(ZIP_FILE, "r") as zip_ref:
+        zip_ref.extractall("/content")
+    df = pd.read_csv(DATA_FILE)
+    st.write("### ✅ Loaded Extracted Dataset (`trainnn.zip`)")
 else:
-    st.error("Dataset file 'trainnn.csv' not found. Please make sure it is available.")
+    st.error("🚫 Dataset file 'trainnn.csv' or 'trainnn.zip' not found. Please make sure it is available.")
 
 # Proceed if the dataset is loaded
 if "df" in locals():
